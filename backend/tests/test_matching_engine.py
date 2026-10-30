@@ -177,3 +177,42 @@ def test_partially_filled_resting_order_can_be_canceled():
     assert canceled.remaining_quantity == Decimal("1.5")
     assert book.snapshot()["asks"] == []
     book.assert_invariants()
+
+
+from hypothesis import given, settings, strategies as st
+
+
+@given(
+    st.lists(
+        st.tuples(
+            st.sampled_from(["BUY", "SELL"]),
+            st.integers(min_value=1, max_value=500),
+            st.integers(min_value=1, max_value=25),
+        ),
+        min_size=1,
+        max_size=60,
+    )
+)
+@settings(max_examples=100, deadline=None)
+def test_generated_order_streams_preserve_fill_conservation_and_book_invariants(commands):
+    book = OrderBook("BTC/USDT")
+    for index, (side, price, quantity) in enumerate(commands, start=1):
+        book.submit(f"generated-{index}", side, str(price), str(quantity))
+        book.assert_invariants()
+
+    executed_quantity = sum((trade.quantity for trade in book.trades), Decimal("0"))
+    buy_filled = sum(
+        (order.filled_quantity for order in book._orders.values() if order.side is Side.BUY),
+        Decimal("0"),
+    )
+    sell_filled = sum(
+        (order.filled_quantity for order in book._orders.values() if order.side is Side.SELL),
+        Decimal("0"),
+    )
+
+    assert buy_filled == executed_quantity
+    assert sell_filled == executed_quantity
+    assert not book.snapshot()["bids"] or not book.snapshot()["asks"] or (
+        Decimal(book.snapshot()["bids"][0]["price"])
+        < Decimal(book.snapshot()["asks"][0]["price"])
+    )
