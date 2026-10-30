@@ -6,20 +6,23 @@ Features are intentionally staged. A checkbox is only complete after implementat
 - [x] Public repository created
 - [x] Project scope and simulation-only safety boundary documented
 - [x] Initial architecture and core invariants documented
-- [x] Add backend and frontend scaffold
-- [x] Add Docker Compose for local development
-- [x] Add API liveness/readiness endpoints and backend smoke tests
-- [ ] Add linting, formatting, and CI
+- [x] Backend and frontend scaffold
+- [x] Docker Compose for local development
+- [x] API liveness/readiness endpoints and backend smoke tests
+- [x] GitHub Actions workflow for backend, Compose, and frontend
 
 ## Phase 1 — Deterministic matching engine
-- [ ] Define asset/market precision and Decimal types
-- [ ] Implement order models and validation
-- [ ] Implement bid and ask books
-- [ ] Implement price-time priority
-- [ ] Implement crossing and trade generation
-- [ ] Implement partial fills and remaining quantity
-- [ ] Implement cancellation behavior
-- [ ] Add deterministic unit tests and property-based invariants
+- [x] Define Decimal precision and reject binary float inputs in the engine
+- [x] Implement order models and validation
+- [x] Implement bid and ask books with FIFO queues per price
+- [x] Implement price-time priority
+- [x] Implement crossing and maker-price trade generation
+- [x] Implement partial fills and remaining quantity
+- [x] Implement cancellation behavior and order state checks
+- [x] Add deterministic unit tests for price/time priority, fills, cancel, replay, and invariants
+- [x] Expose simulated order, order-book, and trade REST endpoints
+- [ ] Add property-based tests over generated order streams
+- [ ] Connect the Next.js UI to order entry and order-book snapshots
 
 ## Phase 2 — Accounts and ledger
 - [ ] Seed simulated users and test balances
@@ -31,7 +34,7 @@ Features are intentionally staged. A checkbox is only complete after implementat
 - [ ] Add reconciliation tests
 
 ## Phase 3 — User-facing trading workflow
-- [ ] REST endpoints for accounts, orders, trades, and book snapshots
+- [ ] REST endpoints for accounts and balance views
 - [ ] Next.js trading interface
 - [ ] Open order and trade history views
 - [ ] WebSocket trade and order-book updates
@@ -46,7 +49,6 @@ Features are intentionally staged. A checkbox is only complete after implementat
 - [ ] Load test with reproducible workload
 - [ ] p50/p95/p99 latency and throughput report
 - [ ] Structured logs and Prometheus metrics
-- [ ] Docker Compose and CI workflow
 - [ ] Deployment and recovery runbook
 
 ## Future enhancements
@@ -57,6 +59,10 @@ Features are intentionally staged. A checkbox is only complete after implementat
 - [ ] Multi-market isolation and scaling experiments
 - [ ] Chaos testing and SLO/error-budget reporting
 
+## Current implementation boundary
+
+The matching engine and REST order endpoints are in-memory and reset when the API process restarts. There is no user account model, balance reservation, durable order persistence, or ledger settlement yet. All orders and trades are simulated test data only.
+
 ## Definition of MVP complete
 
-A local or deployed simulation can accept limit orders, match them deterministically, partially fill and cancel orders, maintain non-negative available balances, write balanced ledger entries, and stream market updates. Automated tests cover the stated invariants and duplicate-request handling.
+A local simulation can accept limit orders, match them deterministically, partially fill and cancel orders, maintain non-negative available balances, write balanced ledger entries, and stream market updates. Automated tests cover the stated invariants and duplicate-request handling.
