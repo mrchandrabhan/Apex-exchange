@@ -1,6 +1,8 @@
 # Apex Exchange — Simulated Digital Asset Exchange
 
-> **Status: In progress — architecture and delivery plan published; implementation is underway.**
+> **Status: Day 1 scaffold committed; GitHub CI passing; local Docker verification pending.**
+
+[![CI](https://github.com/mrchandrabhan/Apex-exchange/actions/workflows/ci.yml/badge.svg)](https://github.com/mrchandrabhan/Apex-exchange/actions/workflows/ci.yml)
 
 Apex Exchange is a portfolio project for exploring the backend and reliability engineering behind a centralized exchange. The initial version is a **simulation only**: users trade test balances against synthetic or explicitly labeled sample market data.
 
