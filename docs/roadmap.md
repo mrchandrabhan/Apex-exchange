@@ -6,7 +6,9 @@ Features are intentionally staged. A checkbox is only complete after implementat
 - [x] Public repository created
 - [x] Project scope and simulation-only safety boundary documented
 - [x] Initial architecture and core invariants documented
-- [ ] Add backend and frontend scaffold
+- [x] Add backend and frontend scaffold
+- [x] Add Docker Compose for local development
+- [x] Add API liveness/readiness endpoints and backend smoke tests
 - [ ] Add linting, formatting, and CI
 
 ## Phase 1 — Deterministic matching engine
