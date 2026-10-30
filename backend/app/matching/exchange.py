@@ -1,4 +1,4 @@
-from app.matching.models import MatchingError, Order, Trade
+from app.matching.models import DuplicateOrderId, MatchingError, Order, Trade
 from app.matching.order_book import OrderBook
 
 
@@ -20,6 +20,8 @@ class SimulatedExchange:
     def submit(
         self, order_id: str, symbol: str, side: str, price, quantity
     ) -> tuple[Order, list[Trade]]:
+        if order_id in self.order_markets:
+            raise DuplicateOrderId(f"Order ID '{order_id}' has already been used.")
         book = self.get_book(symbol)
         order, trades = book.submit(order_id, side, price, quantity)
         self.order_markets[order_id] = book.symbol

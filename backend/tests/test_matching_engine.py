@@ -162,3 +162,18 @@ def test_same_order_sequence_replays_to_identical_trades_and_book():
     assert first.trades == second.trades
     assert first.snapshot() == second.snapshot()
     assert [order.sequence for order in first._orders.values()] == [1, 2, 3, 4]
+
+
+
+def test_partially_filled_resting_order_can_be_canceled():
+    book = OrderBook("BTC/USDT")
+    book.submit("resting-ask", Side.SELL, "100", "2")
+    book.submit("small-bid", Side.BUY, "100", "0.5")
+
+    canceled = book.cancel("resting-ask")
+
+    assert canceled.status is OrderStatus.CANCELED
+    assert canceled.filled_quantity == Decimal("0.5")
+    assert canceled.remaining_quantity == Decimal("1.5")
+    assert book.snapshot()["asks"] == []
+    book.assert_invariants()
