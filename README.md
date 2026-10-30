@@ -105,11 +105,51 @@ Market orders should be added only after price validation, balance reservation, 
 
 See [docs/roadmap.md](docs/roadmap.md). The first milestone is a correct matching-engine library with deterministic tests, followed by transactional account and order APIs.
 
-## Local development
+## Day 1 scaffold — run locally
 
-The runnable application scaffold is being built. Setup and test instructions will be added once the initial backend and frontend are committed.
+### Prerequisites
+- Docker Desktop with the Linux container engine running.
+- Git.
 
-Planned local settings are in [`.env.example`](.env.example). No API keys are needed for the simulated MVP.
+### Start the complete stack
+
+```powershell
+docker compose up --build
+```
+
+Open:
+- Web application: http://localhost:3001
+- API documentation: http://localhost:8100/docs
+- API liveness: http://localhost:8100/health
+- API/database readiness: http://localhost:8100/ready
+- Synthetic market fixture: http://localhost:8100/api/v1/markets
+
+PostgreSQL is exposed on host port `5434`. The API serves clearly labeled synthetic reference market fixtures only. The current UI is a dashboard scaffold; order entry, matching, wallet balances, ledger settlement, and WebSocket updates are not implemented yet.
+
+### Run backend tests
+
+```powershell
+docker compose exec backend pytest -q
+```
+
+### Stop the stack
+
+```powershell
+docker compose down
+```
+
+To remove the local database volume as well (destructive): `docker compose down -v`.
+
+### Useful commands
+
+```powershell
+docker compose ps
+docker compose logs -f backend
+docker compose logs -f frontend
+docker compose logs -f db
+```
+
+All prices and balances in the MVP are synthetic/test data. This project has no real deposits, withdrawals, custody, keys, blockchain transactions, or live trading.
 
 ## Engineering focus
 
