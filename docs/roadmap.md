@@ -21,8 +21,8 @@ Features are intentionally staged. A checkbox is only complete after implementat
 - [x] Implement cancellation behavior and order state checks
 - [x] Add deterministic unit tests for price/time priority, fills, cancel, replay, and invariants
 - [x] Expose simulated order, order-book, and trade REST endpoints
-- [ ] Add property-based tests over generated order streams
-- [ ] Connect the Next.js UI to order entry and order-book snapshots
+- [x] Add property-based tests over generated order streams
+- [x] Connect the Next.js UI to order entry and order-book snapshots
 
 ## Phase 2 — Accounts and ledger
 - [ ] Seed simulated users and test balances
@@ -35,10 +35,10 @@ Features are intentionally staged. A checkbox is only complete after implementat
 
 ## Phase 3 — User-facing trading workflow
 - [ ] REST endpoints for accounts and balance views
-- [ ] Next.js trading interface
+- [x] Next.js trading interface for synthetic markets, book snapshots, recent trades and test-order entry
 - [ ] Open order and trade history views
 - [ ] WebSocket trade and order-book updates
-- [ ] Explicit test-funds labeling throughout the UI
+- [x] Explicit simulation/test-funds labeling throughout the UI
 - [ ] Error and reconnect handling
 
 ## Phase 4 — Reliability engineering
@@ -61,7 +61,7 @@ Features are intentionally staged. A checkbox is only complete after implementat
 
 ## Current implementation boundary
 
-The matching engine and REST order endpoints are in-memory and reset when the API process restarts. There is no user account model, balance reservation, durable order persistence, or ledger settlement yet. All orders and trades are simulated test data only.
+The matching engine and REST order endpoints are in-memory and reset when the API process restarts. The Next.js interface supports synthetic market selection, order-book snapshots, recent simulated trades and limit test-order entry. There is no user account model, balance reservation, durable order persistence, or ledger settlement yet. All orders and trades are simulated test data only.
 
 ## Definition of MVP complete
 
