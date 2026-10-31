@@ -1,6 +1,6 @@
 # Apex Exchange — Simulated Digital Asset Exchange
 
-> **Status: In-memory deterministic matching engine and REST endpoints implemented; persistence, balances, ledger, and UI order entry remain in progress.**
+> **Status: Deterministic in-memory matching engine, REST API, Docker Compose stack and Next.js test-order dashboard implemented; simulated balances, ledger and durable exchange state remain in progress.**
 
 [![CI](https://github.com/mrchandrabhan/Apex-exchange/actions/workflows/ci.yml/badge.svg)](https://github.com/mrchandrabhan/Apex-exchange/actions/workflows/ci.yml)
 
@@ -24,7 +24,7 @@ Apex Exchange is a portfolio project exploring the backend and reliability engin
 | REST order, order-book, and trade endpoints | Implemented |
 | Simulated accounts and balance reservations | Next milestone |
 | Double-entry ledger and durable persistence | Planned |
-| WebSocket market updates and trading UI | Planned |
+| WebSocket market updates | Planned |
 
 ## Matching engine
 
