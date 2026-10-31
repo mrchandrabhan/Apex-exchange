@@ -21,7 +21,9 @@ Apex Exchange is a portfolio project exploring the backend and reliability engin
 | Partial fills and remaining quantities | Implemented |
 | Order cancellation and state validation | Implemented |
 | Deterministic replay and book invariants | Unit-tested |
-| REST order, order-book, and trade endpoints | Implemented |
+| REST order, order-book, trade, and market endpoints | Implemented |
+| Next.js market dashboard, order-book display, recent trades, and limit test-order entry | Implemented |
+| Property-based order-stream and book-invariant tests | Implemented |
 | Simulated accounts and balance reservations | Next milestone |
 | Double-entry ledger and durable persistence | Planned |
 | WebSocket market updates | Planned |
