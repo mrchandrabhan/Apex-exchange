@@ -89,3 +89,7 @@ The matching engine is currently in-memory and resets when the backend restarts.
 This is **not** a real exchange. It has no real-money deposits, withdrawals, custody, wallet keys, blockchain transactions, or live execution. No external market prices are consumed. All balances and trades are simulated test data.
 
 See [docs/architecture.md](docs/architecture.md) and [docs/roadmap.md](docs/roadmap.md) for the current design and next stages.
+
+## License
+
+Released under the [MIT License](LICENSE).
